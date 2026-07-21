@@ -18,6 +18,7 @@ import { Details } from '../create/components/Details';
 import { Notes } from '../create/components/Notes';
 import { TaxSettings } from '../create/components/Taxes';
 import classNames from 'classnames';
+import { GomExpenseApprovalCard } from '../common/components/GomExpenseApprovalCard';
 
 export interface Context {
   errors: ValidationBag | undefined;
@@ -85,6 +86,9 @@ export default function Edit() {
           taxInputType={taxInputType}
           setTaxInputType={setTaxInputType}
         />
+
+        {/* gom: expense approvals (fork addition) */}
+        <GomExpenseApprovalCard expense={expense} />
       </div>
     </div>
   );

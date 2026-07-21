@@ -72,6 +72,10 @@ export const keys = {
     path: '/api/v1/business_trips',
     dependencies: ['/api/v1/documents'],
   },
+  gom_expense_approvals: {
+    path: '/api/v1/gom_expense_approvals',
+    dependencies: [],
+  },
   group_settings: {
     path: '/api/v1/group_settings',
     dependencies: ['/api/v1/clients', '/api/v1/clients/show_settings'],

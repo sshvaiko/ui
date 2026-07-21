@@ -76,6 +76,8 @@ import { useChangeTemplate } from '$app/pages/settings/invoice-design/pages/cust
 import { normalizeColumnName } from '$app/common/helpers/data-table';
 import { useDisplayRunTemplateActions } from '$app/common/hooks/useDisplayRunTemplateActions';
 import { Frequency } from '$app/common/enums/frequency';
+import { useExpenseApprovalsQuery } from '$app/common/queries/gom-expense-approvals';
+import { GomApprovalBadge } from './components/GomApprovalBadge';
 
 export function useActions() {
   const [t] = useTranslation();
@@ -227,6 +229,7 @@ export const defaultColumns: string[] = [
   'date',
   'amount',
   'public_notes',
+  'gom_approval',
 ];
 
 export function useAllExpenseColumns() {
@@ -273,6 +276,7 @@ export function useAllExpenseColumns() {
     'transaction',
     'transaction_reference',
     'updated_at',
+    'gom_approval',
   ] as const;
 
   return expenseColumns.map((column) => normalizeColumnName(column));
@@ -293,6 +297,9 @@ export function useExpenseColumns() {
   const calculateExpenseAmount = useCalculateExpenseAmount();
   const calculateExpenseExclusiveAmount = useCalculateExpenseExclusiveAmount();
   const expenseColumns = useAllExpenseColumns();
+
+  // gom: expense approvals (fork addition)
+  const { byExpenseId: approvalsByExpenseId } = useExpenseApprovalsQuery();
   type ExpenseColumns = (typeof expenseColumns)[number];
 
   const [firstCustom, secondCustom, thirdCustom, fourthCustom] =
@@ -614,6 +621,15 @@ export function useExpenseColumns() {
         <Link to={route('/projects/:id', { id: expense?.project?.id })}>
           {expense?.project?.name}
         </Link>
+      ),
+    },
+    // gom: expense approvals (fork addition)
+    {
+      column: 'gom_approval',
+      id: 'id',
+      label: t('gom_approval'),
+      format: (_, expense) => (
+        <GomApprovalBadge approval={approvalsByExpenseId[expense.id]} />
       ),
     },
   ];
