@@ -260,6 +260,20 @@ export function useNavigation() {
       },
     },
     {
+      name: t('business_trips'),
+      href: '/business_trips',
+      icon: SuitCase,
+      /* PoC: reachable only by admins through the Green0meter embed anyway. */
+      visible: true,
+      rightButton: {
+        icon: Plus,
+        to: '/business_trips/create',
+        label: t('new_business_trip'),
+        visible: true,
+        tooltipLabel: t('new_business_trip') as string,
+      },
+    },
+    {
       name: t('recurring_expenses'),
       href: '/recurring_expenses',
       icon: CurrencyExchange,

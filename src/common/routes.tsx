@@ -25,6 +25,7 @@ import { projectRoutes } from '$app/pages/projects/routes';
 import { taskRoutes } from '$app/pages/tasks/routes';
 import { vendorRoutes } from '$app/pages/vendors/routes';
 import { expenseRoutes } from '$app/pages/expenses/routes';
+import { businessTripRoutes } from '$app/pages/business-trips/routes';
 import { purchaseOrderRoutes } from '$app/pages/purchase-orders/routes';
 import { reportRoutes } from '$app/pages/reports/routes';
 import { transactionRoutes } from '$app/pages/transactions/routes';
@@ -74,6 +75,7 @@ export const routes = (
       {vendorRoutes}
       {purchaseOrderRoutes}
       {expenseRoutes}
+      {businessTripRoutes}
       {recurringExpenseRoutes}
       {reportRoutes}
       {transactionRoutes}

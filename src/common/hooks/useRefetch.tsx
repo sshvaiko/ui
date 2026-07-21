@@ -68,6 +68,10 @@ export const keys = {
       '/api/v1/documents',
     ],
   },
+  business_trips: {
+    path: '/api/v1/business_trips',
+    dependencies: ['/api/v1/documents'],
+  },
   group_settings: {
     path: '/api/v1/group_settings',
     dependencies: ['/api/v1/clients', '/api/v1/clients/show_settings'],
