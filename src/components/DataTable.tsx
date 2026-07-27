@@ -33,7 +33,12 @@ import { useQuery } from 'react-query';
 import { route } from '$app/common/helpers/route';
 import { Divider } from './cards/Divider';
 import { Actions, SelectOption } from './datatables/Actions';
+import { Inbox } from 'react-feather';
 import { Dropdown } from './dropdown/Dropdown';
+
+/* gom: financial-grade alignment — money-like columns right-align with tabular figures */
+const isNumericColumnId = (id: string) =>
+  /amount|balance|total|price|cost|rate|paid|quantity/i.test(id);
 import { DropdownElement } from './dropdown/DropdownElement';
 import { Button, Checkbox } from './forms';
 import { Spinner } from './Spinner';
@@ -1076,7 +1081,9 @@ export function DataTable<T extends object>(props: Props<T>) {
                   <Th
                     id={column.id}
                     key={index}
-                    className={styleOptions?.thClassName}
+                    className={classNames(styleOptions?.thClassName, {
+                      'text-right': isNumericColumnId(column.id),
+                    })}
                     isCurrentlyUsed={sortedBy === (column.sortKey ?? column.id)}
                     sortKey={column.sortKey}
                     onColumnClick={(data: ColumnSortPayload) => {
@@ -1093,7 +1100,11 @@ export function DataTable<T extends object>(props: Props<T>) {
                     descIcon={styleOptions?.descIcon}
                     ascIcon={styleOptions?.ascIcon}
                   >
-                    <div className="flex items-center space-x-3">
+                    <div
+                      className={classNames('flex items-center space-x-3', {
+                        'justify-end': isNumericColumnId(column.id),
+                      })}
+                    >
                       {dateRangeColumns.some(
                         (dateRangeColumn) =>
                           column.id === dateRangeColumn.column
@@ -1137,7 +1148,9 @@ export function DataTable<T extends object>(props: Props<T>) {
                 )
             )}
 
-            {props.withResourcefulActions && !hideEditableOptions && <Th></Th>}
+            {props.withResourcefulActions && !hideEditableOptions && (
+              <Th className="w-12"></Th>
+            )}
           </Thead>
           <Tbody
             style={{
@@ -1186,9 +1199,21 @@ export function DataTable<T extends object>(props: Props<T>) {
                   }}
                 >
                   <Td className={styleOptions?.tdClassName} colSpan={100}>
-                    <div className="flex items-center justify-center py-10">
-                      <span className="text-sm" style={{ color: colors.$17 }}>
+                    <div className="flex flex-col items-center justify-center space-y-3 py-14">
+                      <span
+                        className="flex items-center justify-center w-12 h-12 rounded-full"
+                        style={{ backgroundColor: colors.$28, color: colors.$26 }}
+                      >
+                        <Inbox size={22} />
+                      </span>
+                      <span
+                        className="text-sm font-medium"
+                        style={{ color: colors.$3 }}
+                      >
                         {t('no_records_found')}
+                      </span>
+                      <span className="text-xs" style={{ color: colors.$17 }}>
+                        {t('gom_empty_hint')}
                       </span>
                     </div>
                   </Td>
@@ -1209,7 +1234,7 @@ export function DataTable<T extends object>(props: Props<T>) {
                 >
                   {!props.withoutActions && !hideEditableOptions && (
                     <Td
-                      className="cursor-pointer"
+                      className="cursor-pointer w-10 px-2"
                       onClick={() => handleCheckboxClick(resource.id)}
                     >
                       <DataTableCheckbox
@@ -1228,6 +1253,10 @@ export function DataTable<T extends object>(props: Props<T>) {
                             {
                               'cursor-pointer': index < 3,
                               'py-4': hideEditableOptions,
+                              'text-right tabular-nums': isNumericColumnId(
+                                column.id
+                              ),
+                              'font-medium': column.id === 'number',
                             },
                             styleOptions?.tdClassName
                           )}
@@ -1249,8 +1278,8 @@ export function DataTable<T extends object>(props: Props<T>) {
                   )}
 
                   {props.withResourcefulActions && !hideEditableOptions && (
-                    <Td>
-                      <Dropdown label={t('actions')}>
+                    <Td className="w-12 px-2 text-center">
+                      <Dropdown label={t('actions')} iconTrigger>
                         {props.linkToEdit &&
                           (props.showEdit?.(resource) || !props.showEdit) && (
                             <DropdownElement

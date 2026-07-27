@@ -9,6 +9,7 @@
  */
 
 import { useColorScheme } from '$app/common/colors';
+import { useAccentColor } from '$app/common/hooks/useAccentColor';
 import { route } from '$app/common/helpers/route';
 import classNames from 'classnames';
 import { MouseEvent, ReactNode, useEffect, useRef } from 'react';
@@ -71,6 +72,7 @@ export function Tabs(props: Props) {
   const params = useParams();
   const location = useLocation();
   const colors = useColorScheme();
+  const accentColor = useAccentColor();
   const [searchParams] = useSearchParams();
   const tabBar = useRef<HTMLDivElement>(null);
 
@@ -182,7 +184,7 @@ export function Tabs(props: Props) {
                     aria-current={isActive(tab) ? 'page' : undefined}
                     style={{
                       borderBottom: isActive(tab)
-                        ? `1px solid ${colors.$3}`
+                        ? `2px solid ${accentColor}`
                         : `1px solid ${colors.$20}`,
                     }}
                   >

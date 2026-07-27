@@ -171,17 +171,17 @@ export function CompanySwitcher() {
                 appendToBody
                 className="flex-1 min-w-0"
               >
-                <span className="block text-sm text-start truncate text-gray-200">
+                <span className="block text-sm text-start truncate">
                   {companyName}
                 </span>
               </Tooltip>
             ) : (
-              <span className="flex-1 min-w-0 block text-sm text-start truncate text-gray-200">
+              <span className="flex-1 min-w-0 block text-sm text-start truncate">
                 {companyName}
               </span>
             )}
 
-            <ExpandCollapseChevron color="#e5e7eb" className="flex-shrink-0" />
+            <ExpandCollapseChevron color={colors.$27} className="flex-shrink-0" />
           </div>
         </Menu.Button>
 

@@ -61,13 +61,13 @@ export function TaskStatus(props: Props) {
     return lastParsedTimeLog[1] === 0;
   };
 
-  if (is_deleted) return <Badge variant="red">{t('deleted')}</Badge>;
+  if (is_deleted) return <Badge withDot variant="red">{t('deleted')}</Badge>;
 
-  if (archived_at) return <Badge variant="orange">{t('archived')}</Badge>;
+  if (archived_at) return <Badge withDot variant="orange">{t('archived')}</Badge>;
 
   if (invoice_id) {
     return (
-      <Badge variant="green" style={{ backgroundColor: statusThemeColors.$3 }}>
+      <Badge withDot variant="green" style={{ backgroundColor: statusThemeColors.$3 }}>
         {t('invoiced')}
       </Badge>
     );
@@ -75,7 +75,7 @@ export function TaskStatus(props: Props) {
 
   if (isRunning()) {
     return (
-      <Badge
+      <Badge withDot
         variant="light-blue"
         style={{ backgroundColor: statusThemeColors.$2 }}
       >

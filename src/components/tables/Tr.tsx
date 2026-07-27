@@ -11,6 +11,7 @@
 import classNames from 'classnames';
 import CommonProps from '../../common/interfaces/common-props.interface';
 import { useColorScheme } from '$app/common/colors';
+import styled from 'styled-components';
 import { memo } from 'react';
 import { isEqual } from 'lodash';
 
@@ -22,6 +23,12 @@ interface Props extends CommonProps {
   withoutBackgroundColor?: boolean;
   memoValue?: unknown;
 }
+
+const HoverableTr = styled.tr`
+  &:hover {
+    background-color: ${(props) => props.theme.hoverColor} !important;
+  }
+`;
 
 export function Tr(props: Props) {
   const {
@@ -36,7 +43,8 @@ export function Tr(props: Props) {
   const colors = useColorScheme();
 
   return (
-    <tr
+    <HoverableTr
+      theme={{ hoverColor: colors.$25 }}
       style={{
         backgroundColor: withoutBackgroundColor
           ? undefined
@@ -52,13 +60,16 @@ export function Tr(props: Props) {
       }
       ref={innerRef}
       {...otherProps}
-      className={classNames(`${props.className}`, {
-        'cursor-pointer': onClick,
-      })}
+      className={classNames(
+        `motion-safe:transition-colors motion-safe:duration-150 ${props.className}`,
+        {
+          'cursor-pointer': onClick,
+        }
+      )}
       tabIndex={props.tabIndex}
     >
       {props.children}
-    </tr>
+    </HoverableTr>
   );
 }
 

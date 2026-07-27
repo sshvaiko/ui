@@ -25,14 +25,14 @@ export function PaymentStatus(props: Props) {
 
   const statusThemeColors = useStatusThemeColorScheme();
 
-  if (is_deleted) return <Badge variant="red">{t('deleted')}</Badge>;
+  if (is_deleted) return <Badge withDot variant="red">{t('deleted')}</Badge>;
 
-  if (archived_at) return <Badge variant="orange">{t('archived')}</Badge>;
+  if (archived_at) return <Badge withDot variant="orange">{t('archived')}</Badge>;
 
   if (applied < amount) {
     if (applied === 0) {
       return (
-        <Badge
+        <Badge withDot
           variant="generic"
           style={{ backgroundColor: statusThemeColors.$1 }}
         >
@@ -40,17 +40,17 @@ export function PaymentStatus(props: Props) {
         </Badge>
       );
     } else {
-      return <Badge variant="generic">{t('partially_unapplied')}</Badge>;
+      return <Badge withDot variant="generic">{t('partially_unapplied')}</Badge>;
     }
   }
 
   if (status_id === PaymentStatusEnum.Pending) {
-    return <Badge variant="generic">{t('payment_status_1')}</Badge>;
+    return <Badge withDot variant="generic">{t('payment_status_1')}</Badge>;
   }
 
   if (status_id === PaymentStatusEnum.Cancelled) {
     return (
-      <Badge
+      <Badge withDot
         variant="light-blue"
         style={{ backgroundColor: statusThemeColors.$4 }}
       >
@@ -61,7 +61,7 @@ export function PaymentStatus(props: Props) {
 
   if (status_id === PaymentStatusEnum.Failed) {
     return (
-      <Badge variant="red" style={{ backgroundColor: statusThemeColors.$5 }}>
+      <Badge withDot variant="red" style={{ backgroundColor: statusThemeColors.$5 }}>
         {t('payment_status_3')}
       </Badge>
     );
@@ -69,7 +69,7 @@ export function PaymentStatus(props: Props) {
 
   if (status_id === PaymentStatusEnum.Completed) {
     return (
-      <Badge variant="green" style={{ backgroundColor: statusThemeColors.$3 }}>
+      <Badge withDot variant="green" style={{ backgroundColor: statusThemeColors.$3 }}>
         {t('payment_status_4')}
       </Badge>
     );
@@ -77,7 +77,7 @@ export function PaymentStatus(props: Props) {
 
   if (status_id === PaymentStatusEnum.PartiallyRefunded) {
     return (
-      <Badge
+      <Badge withDot
         variant="dark-blue"
         style={{ backgroundColor: statusThemeColors.$2 }}
       >
@@ -87,7 +87,7 @@ export function PaymentStatus(props: Props) {
   }
 
   if (status_id === PaymentStatusEnum.Refunded) {
-    return <Badge variant="generic">{t('payment_status_6')}</Badge>;
+    return <Badge withDot variant="generic">{t('payment_status_6')}</Badge>;
   }
 
   return <></>;

@@ -10,7 +10,7 @@
 
 import Tippy from '@tippyjs/react/headless';
 import CommonProps from '../../common/interfaces/common-props.interface';
-import { ChevronDown } from 'react-feather';
+import { ChevronDown, MoreVertical } from 'react-feather';
 import {
   Children,
   cloneElement,
@@ -28,6 +28,7 @@ import { useColorScheme } from '$app/common/colors';
 
 interface Props extends CommonProps {
   label?: string | null;
+  iconTrigger?: boolean;
   cardActions?: boolean;
   cypressRef?: string;
   /** When set, applied to the trigger control as data-cy (defaults to chevronDownButton). */
@@ -42,6 +43,12 @@ const LabelButton = styled.button`
   color: ${(props) => props.theme.color} !important;
   background-color: ${(props) => props.theme.backgroundColor} !important;
   border-color: ${(props) => props.theme.borderColor} !important;
+
+  &:hover {
+    background-color: ${(props) =>
+      props.theme.hoverBackgroundColor ||
+      props.theme.backgroundColor} !important;
+  }
 `;
 
 const DropdownElements = styled.div`
@@ -124,18 +131,35 @@ export function Dropdown(props: Props) {
           >
             {props.customLabel}
           </div>
+        ) : props.iconTrigger ? (
+          <LabelButton
+            theme={{
+              backgroundColor: 'transparent',
+              color: colors.$16,
+              borderColor: 'transparent',
+              hoverBackgroundColor: colors.$25,
+            }}
+            type="button"
+            disabled={props.disabled}
+            onClick={() => setVisible(!visible)}
+            className="inline-flex items-center justify-center p-1.5 rounded-md disabled:cursor-not-allowed disabled:opacity-75 motion-safe:transition-colors motion-safe:duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3AAC6F]/40"
+            data-cy={props.triggerCypressRef ?? 'chevronDownButton'}
+          >
+            <MoreVertical size={18} />
+          </LabelButton>
         ) : (
           <LabelButton
             theme={{
-              backgroundColor: colors.$18,
-              color: colors.$1,
+              backgroundColor: colors.$1,
+              color: colors.$3,
               borderColor: props.labelButtonBorderColor || colors.$24,
+              hoverBackgroundColor: colors.$7,
             }}
             type="button"
             disabled={props.disabled}
             onClick={() => setVisible(!visible)}
             className={classNames(
-              `border inline-flex items-center space-x-2 px-4 justify-center rounded-md text-sm disabled:cursor-not-allowed disabled:opacity-75 py-2 ${props.className}`,
+              `border inline-flex items-center space-x-2 px-4 justify-center rounded-md text-sm disabled:cursor-not-allowed disabled:opacity-75 py-2 motion-safe:transition-colors motion-safe:duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3AAC6F]/40 ${props.className}`,
               {
                 'hover:bg-white hover:border-gray-300': !props.cardActions,
                 'hover:opacity-90': props.cardActions,

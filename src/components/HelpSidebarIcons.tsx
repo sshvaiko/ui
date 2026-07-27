@@ -231,7 +231,7 @@ export function HelpSidebarIcons(props: Props) {
 
       <nav
         style={{ borderColor: colors.$5 }}
-        className={classNames('flex space-x-2.5 py-4 text-white border-t', {
+        className={classNames('flex space-x-2.5 py-4 border-t', {
           'justify-end': mobileNavbar,
           'justify-around': !mobileNavbar,
           'px-2': !isUpdateAvailable,
@@ -249,7 +249,7 @@ export function HelpSidebarIcons(props: Props) {
                   className="cursor-pointer"
                   onClick={() => setIsUpdateModalVisible(true)}
                 >
-                  <TriangleWarning color="white" size="1.3rem" />
+                  <TriangleWarning color={colors.$27} size="1.3rem" />
                 </div>
               </Tippy>
             )}
@@ -264,7 +264,7 @@ export function HelpSidebarIcons(props: Props) {
                   className="cursor-pointer"
                   onClick={() => setCronsNotEnabledModal(true)}
                 >
-                  <CircleWarning color="white" size="1.3rem" />
+                  <CircleWarning color={colors.$27} size="1.3rem" />
                 </div>
               </Tippy>
             )}
@@ -288,7 +288,7 @@ export function HelpSidebarIcons(props: Props) {
                     window.open('https://slack.invoiceninja.com', '_blank')
                   }
                 >
-                  <Icon element={FaSlack} color="white" size={21.5} />
+                  <Icon element={FaSlack} color={colors.$27} size={21.5} />
                 </div>
               )}
             </Tippy>
@@ -305,7 +305,7 @@ export function HelpSidebarIcons(props: Props) {
                     window.open('https://forum.invoiceninja.com', '_blank')
                   }
                 >
-                  <Message color="white" size="1.3rem" />
+                  <Message color={colors.$27} size="1.3rem" />
                 </div>
               </Tippy>
             )}
@@ -329,7 +329,7 @@ export function HelpSidebarIcons(props: Props) {
                     )
                   }
                 >
-                  <CircleQuestion color="white" size="1.3rem" />
+                  <CircleQuestion color={colors.$27} size="1.3rem" />
                 </div>
               </Tippy>
             )}
@@ -343,7 +343,7 @@ export function HelpSidebarIcons(props: Props) {
                 className="cursor-pointer"
                 onClick={() => setIsAboutVisible(true)}
               >
-                <CircleInfo color="white" size="1.3rem" />
+                <CircleInfo color={colors.$27} size="1.3rem" />
               </div>
             </Tippy>
 
@@ -357,9 +357,9 @@ export function HelpSidebarIcons(props: Props) {
                 onClick={() => handleDarkLightMode(!reactSettings?.dark_mode)}
               >
                 {reactSettings?.dark_mode ? (
-                  <Sun color="white" size="1.3rem" />
+                  <Sun color={colors.$27} size="1.3rem" />
                 ) : (
-                  <MoonStars color="white" size="1.3rem" />
+                  <MoonStars color={colors.$27} size="1.3rem" />
                 )}
               </div>
             </Tippy>
@@ -380,9 +380,9 @@ export function HelpSidebarIcons(props: Props) {
             onClick={() => handleCollapseExpandSidebar(!isMiniSidebar)}
           >
             {isMiniSidebar ? (
-              <OpenNavbarArrow color="#e5e7eb" size="1.5rem" />
+              <OpenNavbarArrow color={colors.$27} size="1.5rem" />
             ) : (
-              <CloseNavbarArrow color="#e5e7eb" size="1.35rem" />
+              <CloseNavbarArrow color={colors.$27} size="1.35rem" />
             )}
           </div>
         </Tippy>

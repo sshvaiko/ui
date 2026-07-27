@@ -38,16 +38,16 @@ export function ExpenseStatus(props: Props) {
   const isPaid = payment_date || payment_type_id || transaction_reference;
 
   if (is_deleted) {
-    return <Badge variant="red">{t('deleted')}</Badge>;
+    return <Badge withDot variant="red">{t('deleted')}</Badge>;
   }
 
   if (archived_at) {
-    return <Badge variant="orange">{t('archived')}</Badge>;
+    return <Badge withDot variant="orange">{t('archived')}</Badge>;
   }
 
   if (isInvoiced) {
     return (
-      <Badge
+      <Badge withDot
         variant="dark-blue"
         style={{ backgroundColor: statusThemeColors.$3 }}
       >
@@ -57,15 +57,15 @@ export function ExpenseStatus(props: Props) {
   }
 
   if (should_be_invoiced)
-    return <Badge variant="light-blue">{t('pending')}</Badge>;
+    return <Badge withDot variant="light-blue">{t('pending')}</Badge>;
 
   if (isPaid) {
     return (
-      <Badge variant="green" style={{ backgroundColor: statusThemeColors.$1 }}>
+      <Badge withDot variant="green" style={{ backgroundColor: statusThemeColors.$1 }}>
         {t('paid')}
       </Badge>
     );
   }
 
-  return <Badge variant="generic">{t('logged')}</Badge>;
+  return <Badge withDot variant="generic">{t('logged')}</Badge>;
 }

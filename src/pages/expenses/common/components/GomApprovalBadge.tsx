@@ -22,16 +22,16 @@ export function GomApprovalBadge(props: Props) {
   const { approval } = props;
 
   if (approval?.status === 1) {
-    return <Badge variant="orange">{t('gom_approval_requested')}</Badge>;
+    return <Badge withDot variant="orange">{t('gom_approval_requested')}</Badge>;
   }
 
   if (approval?.status === 2) {
-    return <Badge variant="green">{t('gom_approval_approved')}</Badge>;
+    return <Badge withDot variant="green">{t('gom_approval_approved')}</Badge>;
   }
 
   if (approval?.status === 3) {
-    return <Badge variant="red">{t('gom_approval_rejected')}</Badge>;
+    return <Badge withDot variant="red">{t('gom_approval_rejected')}</Badge>;
   }
 
-  return <Badge variant="generic">{t('gom_approval_none')}</Badge>;
+  return <Badge withDot variant="generic">{t('gom_approval_none')}</Badge>;
 }

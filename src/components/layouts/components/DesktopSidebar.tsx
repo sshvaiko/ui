@@ -79,7 +79,7 @@ export function DesktopSidebar(props: Props) {
             }
           )}
           style={{
-            borderColor: 'white',
+            borderColor: colors.$5,
             color: colors.$3,
           }}
         >

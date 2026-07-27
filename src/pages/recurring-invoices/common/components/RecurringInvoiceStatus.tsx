@@ -39,13 +39,13 @@ export function RecurringInvoiceStatus(props: Props) {
   const remainingCycles =
     remaining_cycles === -1 ? 'endless' : remaining_cycles;
 
-  if (isDeleted) return <Badge variant="red">{t('deleted')}</Badge>;
+  if (isDeleted) return <Badge withDot variant="red">{t('deleted')}</Badge>;
 
-  if (isArchived) return <Badge variant="orange">{t('archived')}</Badge>;
+  if (isArchived) return <Badge withDot variant="orange">{t('archived')}</Badge>;
 
   if (!isDraft && remainingCycles === 0) {
     return (
-      <Badge
+      <Badge withDot
         variant="light-blue"
         style={{ backgroundColor: statusThemeColors.$1 }}
       >
@@ -56,7 +56,7 @@ export function RecurringInvoiceStatus(props: Props) {
 
   if (isPending) {
     return (
-      <Badge
+      <Badge withDot
         variant="dark-blue"
         style={{ backgroundColor: statusThemeColors.$2 }}
       >
@@ -66,12 +66,12 @@ export function RecurringInvoiceStatus(props: Props) {
   }
 
   if (isDraft) {
-    return <Badge variant="generic">{t('draft')}</Badge>;
+    return <Badge withDot variant="generic">{t('draft')}</Badge>;
   }
 
   if (status_id === RecurringInvoiceStatusEnum.ACTIVE) {
     return (
-      <Badge variant="green" style={{ backgroundColor: statusThemeColors.$3 }}>
+      <Badge withDot variant="green" style={{ backgroundColor: statusThemeColors.$3 }}>
         {t('active')}
       </Badge>
     );
@@ -79,7 +79,7 @@ export function RecurringInvoiceStatus(props: Props) {
 
   if (status_id === RecurringInvoiceStatusEnum.PAUSED) {
     return (
-      <Badge variant="orange" style={{ backgroundColor: statusThemeColors.$4 }}>
+      <Badge withDot variant="orange" style={{ backgroundColor: statusThemeColors.$4 }}>
         {t('paused')}
       </Badge>
     );

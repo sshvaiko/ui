@@ -47,13 +47,13 @@ export function QuoteStatus(props: Props) {
   const statusExpired = status_id === QuoteStatusEnum.Expired;
   const statusRejected = status_id === QuoteStatusEnum.Rejected;
 
-  if (is_deleted) return <Badge variant="red">{t('deleted')}</Badge>;
+  if (is_deleted) return <Badge withDot variant="red">{t('deleted')}</Badge>;
 
-  if (archived_at) return <Badge variant="orange">{t('archived')}</Badge>;
+  if (archived_at) return <Badge withDot variant="orange">{t('archived')}</Badge>;
 
   if (invoice_id) {
     return (
-      <Badge variant="green" style={{ backgroundColor: statusThemeColors.$3 }}>
+      <Badge withDot variant="green" style={{ backgroundColor: statusThemeColors.$3 }}>
         {t('converted')}
       </Badge>
     );
@@ -61,7 +61,7 @@ export function QuoteStatus(props: Props) {
 
   if (statusExpired && !isExpiringToday) {
     return (
-      <Badge variant="red" style={{ backgroundColor: statusThemeColors.$5 }}>
+      <Badge withDot variant="red" style={{ backgroundColor: statusThemeColors.$5 }}>
         {t('expired')}
       </Badge>
     );
@@ -69,18 +69,18 @@ export function QuoteStatus(props: Props) {
 
   if (statusRejected) {
     return (
-      <Badge variant="red" style={{ backgroundColor: statusThemeColors.$5 }}>
+      <Badge withDot variant="red" style={{ backgroundColor: statusThemeColors.$5 }}>
         {t('rejected')}
       </Badge>
     );
   }
 
   if (isViewed && isUnpaid && !isApproved) {
-    return <Badge variant="yellow">{t('viewed')}</Badge>;
+    return <Badge withDot variant="yellow">{t('viewed')}</Badge>;
   }
 
   if (status_id === QuoteStatusEnum.Draft) {
-    return <Badge variant="generic">{t('draft')}</Badge>;
+    return <Badge withDot variant="generic">{t('draft')}</Badge>;
   }
 
   if (
@@ -88,7 +88,7 @@ export function QuoteStatus(props: Props) {
     (statusExpired && isExpiringToday)
   ) {
     return (
-      <Badge
+      <Badge withDot
         variant="light-blue"
         style={{ backgroundColor: statusThemeColors.$1 }}
       >
@@ -99,7 +99,7 @@ export function QuoteStatus(props: Props) {
 
   if (status_id === QuoteStatusEnum.Approved) {
     return (
-      <Badge
+      <Badge withDot
         variant="dark-blue"
         style={{ backgroundColor: statusThemeColors.$2 }}
       >

@@ -82,7 +82,7 @@ export function Th$(props: Props) {
     <th
       ref={thRef}
       style={{
-        color: props.textColor || colors.$17,
+        color: props.textColor || colors.$22,
         borderColor: colors.$20,
         width: currentWidth,
         ...props.style,
@@ -90,14 +90,14 @@ export function Th$(props: Props) {
       onMouseDown={handleMouseDown}
       onDoubleClick={handleDoubleClick}
       className={classNames(
-        `text-left font-normal tracking-wider whitespace-nowrap ${props.className}`,
+        `text-left font-medium tracking-wide whitespace-nowrap ${props.className}`,
         {
           'border-r relative': props.resizable,
           'py-2.5': !props.withoutVerticalPadding,
-          'text-xs': props.textSize === 'extraSmall',
-          'text-sm': props.textSize === 'small' || !props.textSize,
+          'text-xs': true,
           'px-2 lg:px-2.5 xl:px-4': !props.withoutHorizontalPadding,
           'cursor-pointer': props.onClick,
+          uppercase: !props.disableUppercase,
         }
       )}
       onMouseMove={handleMouseMove}

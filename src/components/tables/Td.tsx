@@ -66,7 +66,7 @@ function HtmlTd(props: HtmlTdProps) {
       className={classNames(
         `text-sm break-words ${props.className} overflow-hidden whitespace-nowrap text-ellipsis`,
         {
-          'px-2 lg:px-2.5 xl:px-4 py-2': !props.withoutPadding,
+          'px-2 lg:px-2.5 xl:px-4 py-3': !props.withoutPadding,
         }
       )}
       style={{

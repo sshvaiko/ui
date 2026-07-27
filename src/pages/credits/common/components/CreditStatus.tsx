@@ -33,21 +33,21 @@ export function CreditStatus(props: Props) {
   const isUnpaid = !isApplied;
   const isViewed = checkCreditInvitationsViewedDate();
 
-  if (is_deleted) return <Badge variant="red">{t('deleted')}</Badge>;
+  if (is_deleted) return <Badge withDot variant="red">{t('deleted')}</Badge>;
 
-  if (archived_at) return <Badge variant="orange">{t('archived')}</Badge>;
+  if (archived_at) return <Badge withDot variant="orange">{t('archived')}</Badge>;
 
   if (isViewed && isUnpaid) {
-    return <Badge variant="light-blue">{t('viewed')}</Badge>;
+    return <Badge withDot variant="light-blue">{t('viewed')}</Badge>;
   }
 
   if (status_id === CreditStatusEnum.Draft) {
-    return <Badge variant="generic">{t('draft')}</Badge>;
+    return <Badge withDot variant="generic">{t('draft')}</Badge>;
   }
 
   if (status_id === CreditStatusEnum.Sent) {
     return (
-      <Badge
+      <Badge withDot
         variant="light-blue"
         style={{ backgroundColor: statusThemeColors.$1 }}
       >
@@ -58,7 +58,7 @@ export function CreditStatus(props: Props) {
 
   if (status_id === CreditStatusEnum.Partial) {
     return (
-      <Badge
+      <Badge withDot
         variant="dark-blue"
         style={{ backgroundColor: statusThemeColors.$2 }}
       >
@@ -69,7 +69,7 @@ export function CreditStatus(props: Props) {
 
   if (status_id === CreditStatusEnum.Applied) {
     return (
-      <Badge variant="green" style={{ backgroundColor: statusThemeColors.$3 }}>
+      <Badge withDot variant="green" style={{ backgroundColor: statusThemeColors.$3 }}>
         {t('applied')}
       </Badge>
     );

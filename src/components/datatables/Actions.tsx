@@ -332,8 +332,13 @@ export function Actions(props: Props) {
       ...base,
       backgroundColor: colors.$1,
       borderColor: colors.$24,
-      borderRadius: '0.375rem',
+      borderRadius: '0.625rem',
       padding: '0 6px',
+      minHeight: '2.375rem',
+      boxShadow: 'none',
+      '&:hover': {
+        borderColor: colors.$24,
+      },
     }),
     valueContainer: (base) => ({
       ...base,
@@ -365,7 +370,7 @@ export function Actions(props: Props) {
       backgroundColor: colors.$1,
       padding: '8px 12px',
       cursor: 'pointer',
-      borderRadius: '0.1875rem',
+      borderRadius: '0.375rem',
       '&:hover': {
         backgroundColor: colors.$4,
       },

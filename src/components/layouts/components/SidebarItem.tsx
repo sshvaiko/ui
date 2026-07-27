@@ -64,33 +64,30 @@ export function SidebarItem(props: Props) {
       <Div
         theme={{
           color: current
-            ? themeColors.$1 || colors.$8
+            ? themeColors.$1 || colors.$28
             : themeColors.$3 || 'transparent',
-          hoverColor: themeColors.$1 || colors.$8,
+          hoverColor: themeColors.$1 || colors.$28,
         }}
         key={item.name}
-        className={classNames(
-          'flex items-center justify-between group px-1.5 text-sm font-medium rounded-md w-full',
-          {
-            'text-white border-l-4 border-transparent': current,
-            'text-gray-300 border-l-4 border-transparent': !current,
-          }
-        )}
+        className="flex items-center justify-between group px-1.5 text-sm font-medium rounded-md w-full"
+        style={{ color: current ? colors.$26 : colors.$27 }}
       >
         <div className="flex flex-col items-center justify-between w-full">
           <LinkStyled to={item.href} className="w-full" withoutDefaultStyling>
             <div
               className="flex justify-start items-center my-2 space-x-3 w-full"
               style={{
-                color: current ? themeColors.$2 : themeColors.$4,
+                color:
+                  (current ? themeColors.$2 : themeColors.$4) ||
+                  (current ? colors.$26 : colors.$27),
               }}
             >
               <item.icon
                 size="1.275rem"
                 color={
                   current
-                    ? themeColors.$2 || 'white'
-                    : themeColors.$4 || '#74747C'
+                    ? themeColors.$2 || colors.$26
+                    : themeColors.$4 || colors.$27
                 }
               />
 
@@ -113,7 +110,7 @@ export function SidebarItem(props: Props) {
             >
               <LinkStyled
                 theme={{
-                  hoverColor: colors.$6,
+                  hoverColor: colors.$28,
                 }}
                 to={item.rightButton.to}
                 className="rounded-sm p-[0.1rem]"
@@ -123,8 +120,8 @@ export function SidebarItem(props: Props) {
                   size="1.1rem"
                   color={
                     current
-                      ? themeColors.$2 || 'white'
-                      : themeColors.$4 || '#d1d5db'
+                      ? themeColors.$2 || colors.$26
+                      : themeColors.$4 || colors.$27
                   }
                 />
               </LinkStyled>
@@ -132,7 +129,7 @@ export function SidebarItem(props: Props) {
           ) : (
             <LinkStyled
               theme={{
-                hoverColor: colors.$6,
+                hoverColor: colors.$28,
               }}
               to={item.rightButton.to}
               className="rounded-sm p-[0.1rem]"
@@ -142,8 +139,8 @@ export function SidebarItem(props: Props) {
                 size="1.1rem"
                 color={
                   current
-                    ? themeColors.$2 || 'white'
-                    : themeColors.$4 || '#d1d5db'
+                    ? themeColors.$2 || colors.$26
+                    : themeColors.$4 || colors.$27
                 }
               />
             </LinkStyled>
@@ -165,21 +162,16 @@ export function SidebarItem(props: Props) {
                       key={subOption.name}
                       theme={{
                         color: location.pathname.startsWith(subOption.href)
-                          ? themeColors.$1 || colors.$8
+                          ? themeColors.$1 || colors.$28
                           : themeColors.$3 || 'transparent',
-                        hoverColor: themeColors.$1 || colors.$8,
+                        hoverColor: themeColors.$1 || colors.$28,
                       }}
-                      className={classNames(
-                        'flex items-center justify-between group pl-2.5 pr-1.5 text-sm font-medium rounded-md w-full',
-                        {
-                          'text-white': location.pathname.startsWith(
-                            subOption.href
-                          ),
-                          'text-gray-300': !location.pathname.startsWith(
-                            subOption.href
-                          ),
-                        }
-                      )}
+                      className="flex items-center justify-between group pl-2.5 pr-1.5 text-sm font-medium rounded-md w-full"
+                      style={{
+                        color: location.pathname.startsWith(subOption.href)
+                          ? colors.$26
+                          : colors.$27,
+                      }}
                     >
                       <div className="flex flex-col items-center justify-between w-full">
                         <LinkStyled
@@ -196,19 +188,21 @@ export function SidebarItem(props: Props) {
                               }
                             )}
                             style={{
-                              color: location.pathname.startsWith(
-                                subOption.href
-                              )
-                                ? themeColors.$2
-                                : themeColors.$4,
+                              color:
+                                (location.pathname.startsWith(subOption.href)
+                                  ? themeColors.$2
+                                  : themeColors.$4) ||
+                                (location.pathname.startsWith(subOption.href)
+                                  ? colors.$26
+                                  : colors.$27),
                             }}
                           >
                             <subOption.icon
                               size={isMiniSidebar ? '1.1rem' : '1.275rem'}
                               color={
                                 location.pathname.startsWith(subOption.href)
-                                  ? themeColors.$2 || 'white'
-                                  : themeColors.$4 || '#74747C'
+                                  ? themeColors.$2 || colors.$26
+                                  : themeColors.$4 || colors.$27
                               }
                             />
 
@@ -222,7 +216,7 @@ export function SidebarItem(props: Props) {
                         subOption.rightButton.visible && (
                           <LinkStyled
                             theme={{
-                              hoverColor: colors.$6,
+                              hoverColor: colors.$28,
                             }}
                             to={subOption.rightButton.to}
                             className="rounded-sm p-[0.1rem]"
@@ -232,8 +226,8 @@ export function SidebarItem(props: Props) {
                               size="1.1rem"
                               color={
                                 location.pathname.startsWith(subOption.href)
-                                  ? themeColors.$2 || 'white'
-                                  : themeColors.$4 || '#d1d5db'
+                                  ? themeColors.$2 || colors.$26
+                                  : themeColors.$4 || colors.$27
                               }
                             />
                           </LinkStyled>

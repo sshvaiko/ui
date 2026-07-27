@@ -348,7 +348,7 @@ export function Combobox<T = any>({
             'relative w-full cursor-default overflow-hidden rounded-md border text-left sm:text-sm',
             {
               'shadow-sm': withShadow,
-              'border-[#09090B26]': !reactSettings.dark_mode && !isOpen,
+              'border-[#00000021]': !reactSettings.dark_mode && !isOpen,
               'border-black': !reactSettings.dark_mode && isOpen,
               'border-[#1f2e41]': reactSettings.dark_mode && !isOpen,
               'border-white': reactSettings.dark_mode && isOpen,
@@ -655,7 +655,7 @@ export function ComboboxStatic<T = any>({
               'relative w-full cursor-default overflow-hidden rounded-md border text-left sm:text-sm',
               {
                 'shadow-sm': withShadow,
-                'border-[#09090B26]': !reactSettings.dark_mode && !isOpen,
+                'border-[#00000021]': !reactSettings.dark_mode && !isOpen,
                 'border-black': !reactSettings.dark_mode && isOpen,
                 'border-[#1f2e41]': reactSettings.dark_mode && !isOpen,
                 'border-white': reactSettings.dark_mode && isOpen,

@@ -11,7 +11,7 @@
 import { SelectField } from '$app/components/forms';
 import { endpoint } from '$app/common/helpers';
 import { Chart } from '$app/pages/dashboard/components/Chart';
-import { useEffect, useMemo, useState } from 'react';
+import { ReactNode, useEffect, useMemo, useState } from 'react';
 import { Spinner } from '$app/components/Spinner';
 import {
   DropdownDateRangePicker,
@@ -22,7 +22,14 @@ import { useTranslation } from 'react-i18next';
 import { request } from '$app/common/helpers/request';
 import { useFormatMoney } from '$app/common/hooks/money/useFormatMoney';
 import { useCurrentCompany } from '$app/common/hooks/useCurrentCompany';
-import { Badge } from '$app/components/Badge';
+import classNames from 'classnames';
+import {
+  AlertCircle,
+  CreditCard,
+  FileText,
+  Layers,
+  ShoppingCart,
+} from 'react-feather';
 import {
   ChartsDefaultView,
   useReactSettings,
@@ -117,6 +124,46 @@ const GLOBAL_DATE_RANGES: Record<string, { start: string; end: string }> = {
     end: dayjs().subtract(1, 'year').endOf('year').format('YYYY-MM-DD'),
   },
 };
+
+/* gom: rich stat tile — tinted icon chip + small-caps label + large tabular figure */
+function GomStatTile(props: {
+  icon: ReactNode;
+  label: ReactNode;
+  value: ReactNode;
+  accent?: string;
+  bordered?: boolean;
+  borderColor?: string;
+}) {
+  const scheme = useColorScheme();
+  const chipBg =
+    scheme.$0 === 'dark' ? 'rgba(58, 172, 111, 0.18)' : '#E6F5ED';
+  const chipColor = scheme.$0 === 'dark' ? '#77C499' : '#26794C';
+
+  return (
+    <div
+      className={classNames(
+        'flex items-center space-x-3 py-4 rounded-md motion-safe:transition-transform motion-safe:duration-150 hover:-translate-y-0.5',
+        { 'border-b border-dashed': props.bordered }
+      )}
+      style={{ borderColor: props.borderColor }}
+    >
+      <div
+        className="flex items-center justify-center w-9 h-9 rounded-lg flex-shrink-0"
+        style={{ backgroundColor: chipBg, color: props.accent || chipColor }}
+      >
+        {props.icon}
+      </div>
+      <div className="flex flex-col min-w-0">
+        <span className="text-xs uppercase tracking-wide text-gray-500 truncate">
+          {props.label}
+        </span>
+        <span className="text-lg font-semibold tabular-nums tracking-[-0.01em] truncate">
+          {props.value}
+        </span>
+      </div>
+    </div>
+  );
+}
 
 export function Totals() {
   const [t] = useTranslation();
@@ -524,100 +571,63 @@ export function Totals() {
             withoutHeaderPadding
           >
             <div className="flex flex-col px-4">
-              <div
-                className="flex justify-between items-center border-b border-dashed py-5"
-                style={{ borderColor: colors.$21 }}
-              >
-                <span className="text-gray-500">{t('invoices')}</span>
-                <Badge style={{ backgroundColor: '#2176FF26' }}>
-                  <span
-                    className="text-base font-mono"
-                    style={{ color: '#2176FF' }}
-                  >
-                    {formatMoney(
-                      totalsData[currency]?.invoices?.invoiced_amount || 0,
-                      company.settings.country_id,
-                      currency.toString(),
-                      2
-                    )}
-                  </span>
-                </Badge>
-              </div>
+              <GomStatTile
+                bordered
+                borderColor={colors.$21}
+                icon={<FileText size={18} />}
+                label={t('invoices')}
+                value={formatMoney(
+                  totalsData[currency]?.invoices?.invoiced_amount || 0,
+                  company.settings.country_id,
+                  currency.toString(),
+                  2
+                )}
+              />
 
-              <div
-                className="flex justify-between items-center border-b border-dashed py-5"
-                style={{ borderColor: colors.$21 }}
-              >
-                <span className="text-gray-500">{t('payments')}</span>
-                <Badge style={{ backgroundColor: '#22C55E26' }}>
-                  <span
-                    className="text-base font-mono"
-                    style={{ color: '#22C55E' }}
-                  >
-                    {formatMoney(
-                      totalsData[currency]?.revenue?.paid_to_date || 0,
-                      company.settings.country_id,
-                      currency.toString(),
-                      2
-                    )}
-                  </span>
-                </Badge>
-              </div>
+              <GomStatTile
+                bordered
+                borderColor={colors.$21}
+                icon={<CreditCard size={18} />}
+                label={t('payments')}
+                value={formatMoney(
+                  totalsData[currency]?.revenue?.paid_to_date || 0,
+                  company.settings.country_id,
+                  currency.toString(),
+                  2
+                )}
+              />
 
-              <div
-                className="flex justify-between items-center border-b border-dashed py-5"
-                style={{ borderColor: colors.$21 }}
-              >
-                <span className="text-gray-500">{t('expenses')}</span>
-                <Badge style={{ backgroundColor: '#A1A1AA26' }}>
-                  <span
-                    className="text-base font-mono"
-                    style={{ color: '#A1A1AA' }}
-                  >
-                    {formatMoney(
-                      totalsData[currency]?.expenses?.amount || 0,
-                      company.settings.country_id,
-                      currency.toString(),
-                      2
-                    )}
-                  </span>
-                </Badge>
-              </div>
+              <GomStatTile
+                bordered
+                borderColor={colors.$21}
+                icon={<ShoppingCart size={18} />}
+                label={t('expenses')}
+                value={formatMoney(
+                  totalsData[currency]?.expenses?.amount || 0,
+                  company.settings.country_id,
+                  currency.toString(),
+                  2
+                )}
+              />
 
-              <div
-                className="flex justify-between items-center border-b border-dashed py-5"
-                style={{ borderColor: colors.$21 }}
-              >
-                <span className="text-gray-500">{t('outstanding')}</span>
-                <Badge style={{ backgroundColor: '#EF444426' }}>
-                  <span
-                    className="text-base font-mono"
-                    style={{ color: '#EF4444' }}
-                  >
-                    {formatMoney(
-                      totalsData[currency]?.outstanding?.amount || 0,
-                      company.settings.country_id,
-                      currency.toString(),
-                      2
-                    )}
-                  </span>
-                </Badge>
-              </div>
+              <GomStatTile
+                bordered
+                borderColor={colors.$21}
+                icon={<AlertCircle size={18} />}
+                label={t('outstanding')}
+                value={formatMoney(
+                  totalsData[currency]?.outstanding?.amount || 0,
+                  company.settings.country_id,
+                  currency.toString(),
+                  2
+                )}
+              />
 
-              <div className="flex justify-between items-center py-5">
-                <span className="text-gray-500">
-                  {t('total_invoices_outstanding')}
-                </span>
-                <Badge
-                  variant="transparent"
-                  className="border"
-                  style={{ borderColor: colors.$21 }}
-                >
-                  <span className="mx-2 text-base font-mono">
-                    {totalsData[currency]?.outstanding?.outstanding_count || 0}
-                  </span>
-                </Badge>
-              </div>
+              <GomStatTile
+                icon={<Layers size={18} />}
+                label={t('total_invoices_outstanding')}
+                value={totalsData[currency]?.outstanding?.outstanding_count || 0}
+              />
             </div>
           </Card>
         )}

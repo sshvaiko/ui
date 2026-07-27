@@ -99,11 +99,11 @@ export function InputField(props: Props) {
           id={props.id}
           type={inputType}
           className={classNames(
-            `w-full py-2 px-3 rounded-md text-sm disabled:opacity-75 disabled:cursor-not-allowed focus:outline-none focus:ring-0 ${props.className}`,
+            `w-full py-2 px-3 rounded-md text-sm disabled:opacity-75 disabled:cursor-not-allowed focus:outline-none motion-safe:transition-colors motion-safe:duration-150 ${props.className}`,
             {
               border: props.border !== false,
-              'border-[#09090B26] focus:border-black': !reactSettings.dark_mode,
-              'border-[#1f2e41] focus:border-white': reactSettings.dark_mode,
+              'border-[#00000021] focus:border-[#77C499] focus:ring-[3px] focus:ring-[#3AAC6F]/15': !reactSettings.dark_mode,
+              'border-[#242B33] focus:border-[#3AAC6F] focus:ring-[3px] focus:ring-[#3AAC6F]/25': reactSettings.dark_mode,
             }
           )}
           placeholder={props.placeholder || ''}

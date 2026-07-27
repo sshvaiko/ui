@@ -28,32 +28,32 @@ export function RecurringExpenseStatus(props: Props) {
   const { is_deleted, archived_at, status_id } = recurringExpense;
 
   if (is_deleted) {
-    return <Badge variant="red">{t('deleted')}</Badge>;
+    return <Badge withDot variant="red">{t('deleted')}</Badge>;
   }
 
   if (archived_at) {
-    return <Badge variant="orange">{t('archived')}</Badge>;
+    return <Badge withDot variant="orange">{t('archived')}</Badge>;
   }
 
   if (RecurringExpenseStatusEnum.Draft === status_id) {
-    return <Badge variant="generic">{t('draft')}</Badge>;
+    return <Badge withDot variant="generic">{t('draft')}</Badge>;
   }
 
   if (RecurringExpenseStatusEnum.Active === status_id) {
     return (
-      <Badge variant="blue" style={{ backgroundColor: statusThemeColors.$3 }}>
+      <Badge withDot variant="blue" style={{ backgroundColor: statusThemeColors.$3 }}>
         {t('active')}
       </Badge>
     );
   }
 
   if (RecurringExpenseStatusEnum.Paused === status_id) {
-    return <Badge variant="yellow">{t('paused')}</Badge>;
+    return <Badge withDot variant="yellow">{t('paused')}</Badge>;
   }
 
   if (RecurringExpenseStatusEnum.Pending === status_id) {
     return (
-      <Badge
+      <Badge withDot
         variant="light-blue"
         style={{ backgroundColor: statusThemeColors.$2 }}
       >
@@ -64,7 +64,7 @@ export function RecurringExpenseStatus(props: Props) {
 
   if (RecurringExpenseStatusEnum.Completed === status_id) {
     return (
-      <Badge variant="green" style={{ backgroundColor: statusThemeColors.$1 }}>
+      <Badge withDot variant="green" style={{ backgroundColor: statusThemeColors.$1 }}>
         {t('completed')}
       </Badge>
     );

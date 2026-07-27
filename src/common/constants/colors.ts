@@ -8,8 +8,11 @@
  * @license https://www.elastic.co/licensing/elastic-license
  */
 
+/* gom: default accent aligned with the Green0meter platform primary
+   (customPalette.green[800/900] — 800 is the lightest shade with >=4.5:1 white
+   text); company-level accent overrides still win. */
 export default {
-  accent: '#117DC0',
-  primary: '#2F7DC3',
-  secondary: '#7081e0',
+  accent: '#26794C',
+  primary: '#26794C',
+  secondary: '#195A37',
 };

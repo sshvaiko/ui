@@ -154,8 +154,8 @@ export function Default(props: Props) {
         })}
       >
         <div
-          style={{ backgroundColor: colors.$1 }}
-          className="sticky top-0 z-10 flex-shrink-0 flex h-16 border-b shadow"
+          style={{ backgroundColor: colors.$1, borderColor: colors.$4 }}
+          className="sticky top-0 z-10 flex-shrink-0 flex h-16 border-b"
         >
           <button
             type="button"
@@ -173,7 +173,7 @@ export function Default(props: Props) {
             <div className="flex flex-1 items-center space-x-4">
               <h2
                 style={{ color: colors.$3 }}
-                className="text-sm md:text-lg whitespace-nowrap"
+                className="text-sm md:text-base font-semibold whitespace-nowrap"
               >
                 {props.title}
               </h2>

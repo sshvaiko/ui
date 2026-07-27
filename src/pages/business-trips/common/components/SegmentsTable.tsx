@@ -19,6 +19,29 @@ import { useTranslation } from 'react-i18next';
 import { useColorScheme } from '$app/common/colors';
 import { CircleXMark } from '$app/components/icons/CircleXMark';
 import { TRANSPORT_TYPES } from '../hooks';
+import { Icon } from '$app/components/icons/Icon';
+import {
+  MdCommute,
+  MdDirectionsBus,
+  MdDirectionsCar,
+  MdDirectionsWalk,
+  MdFlight,
+  MdLocalTaxi,
+  MdTrain,
+} from 'react-icons/md';
+
+/* gom: transport-type leading icons (segments table) */
+const TRANSPORT_ICONS: Record<string, typeof MdTrain> = {
+  company_car: MdDirectionsCar,
+  private_car: MdDirectionsCar,
+  train: MdTrain,
+  plane: MdFlight,
+  public_transport: MdDirectionsBus,
+  taxi: MdLocalTaxi,
+  walking: MdDirectionsWalk,
+  transport_other: MdCommute,
+  other: MdCommute,
+};
 
 interface Props {
   businessTrip: BusinessTrip | undefined;
@@ -189,23 +212,44 @@ export function SegmentsTable(props: Props) {
                 </Td>
 
                 <Td className="pl-3 py-3" withoutPadding>
-                  <SelectField
-                    value={segment.transport_type}
-                    onValueChange={(value) =>
-                      updateSegment(index, 'transport_type', value)
-                    }
-                  >
-                    {TRANSPORT_TYPES.map((type) => (
-                      <option key={type} value={type}>
-                        {t(type)}
-                      </option>
-                    ))}
-                  </SelectField>
+                  <div className="flex items-center space-x-2">
+                    <span
+                      className="flex items-center justify-center w-7 h-7 rounded-lg flex-shrink-0"
+                      style={{
+                        backgroundColor:
+                          colors.$0 === 'dark'
+                            ? 'rgba(58, 172, 111, 0.18)'
+                            : '#E6F5ED',
+                      }}
+                    >
+                      <Icon
+                        element={
+                          TRANSPORT_ICONS[segment.transport_type] || MdCommute
+                        }
+                        color={colors.$0 === 'dark' ? '#77C499' : '#26794C'}
+                        size={17}
+                      />
+                    </span>
+
+                    <SelectField
+                      value={segment.transport_type}
+                      onValueChange={(value) =>
+                        updateSegment(index, 'transport_type', value)
+                      }
+                    >
+                      {TRANSPORT_TYPES.map((type) => (
+                        <option key={type} value={type}>
+                          {t(type)}
+                        </option>
+                      ))}
+                    </SelectField>
+                  </div>
                 </Td>
 
                 <Td className="pl-3 py-3" withoutPadding>
                   <InputField
                     type="number"
+                    className="text-right tabular-nums"
                     value={segment.distance_km}
                     onValueChange={(value) =>
                       updateSegment(

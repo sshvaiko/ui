@@ -30,6 +30,33 @@ interface Props {
 
 type ApprovalAction = 'submit' | 'approve' | 'reject';
 
+/* gom: initials avatar chip — 28px tinted circle + name */
+function GomPersonChip(props: { name: string }) {
+  const scheme = useColorScheme();
+  const initials = props.name
+    .split(' ')
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase())
+    .join('');
+
+  return (
+    <div className="flex items-center space-x-2">
+      <span
+        className="flex items-center justify-center w-7 h-7 rounded-full text-xs font-medium flex-shrink-0"
+        style={{
+          backgroundColor:
+            scheme.$0 === 'dark' ? 'rgba(58, 172, 111, 0.18)' : '#E6F5ED',
+          color: scheme.$0 === 'dark' ? '#77C499' : '#26794C',
+        }}
+      >
+        {initials}
+      </span>
+      <span className="truncate">{props.name}</span>
+    </div>
+  );
+}
+
 export function GomExpenseApprovalCard(props: Props) {
   const [t] = useTranslation();
 
@@ -100,19 +127,24 @@ export function GomExpenseApprovalCard(props: Props) {
 
       {approval?.approver_name && (
         <Element leftSide={t('gom_approver')} noExternalPadding>
-          {approval.approver_name}
+          <GomPersonChip name={approval.approver_name} />
         </Element>
       )}
 
       {approval?.requested_by_name && (
         <Element leftSide={t('user')} noExternalPadding>
-          {approval.requested_by_name}
+          <GomPersonChip name={approval.requested_by_name} />
         </Element>
       )}
 
       {approval?.note && (
         <Element leftSide={t('gom_approval_note')} noExternalPadding>
-          {approval.note}
+          <div
+            className="border-l-2 pl-3 py-0.5 text-sm"
+            style={{ borderColor: '#3AAC6F', color: colors.$22 }}
+          >
+            {approval.note}
+          </div>
         </Element>
       )}
 
@@ -152,6 +184,7 @@ export function GomExpenseApprovalCard(props: Props) {
           <Button
             behavior="button"
             type="secondary"
+            destructive
             onClick={() => handleAction('reject')}
             disabled={isFormBusy}
             disableWithoutIcon

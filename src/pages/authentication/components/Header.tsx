@@ -9,14 +9,22 @@
  */
 
 import { Link } from '../../../components/forms/Link';
-import Logo from '../../../resources/images/invoiceninja-logo@dark.png';
+import { useColorScheme } from '$app/common/colors';
 
+/* gom: quiet Greenometer text lockup instead of the Invoice Ninja logo */
 export function Header() {
+  const colors = useColorScheme();
+
   return (
     <>
       <div className="flex justify-center py-8">
         <Link to="/">
-          <img src={Logo} alt="Invoice Ninja Logo" className="h-12" />
+          <span
+            className="text-2xl font-semibold tracking-tight"
+            style={{ color: colors.$0 === 'dark' ? '#FFFFFF' : '#101827' }}
+          >
+            Greenometer
+          </span>
         </Link>
       </div>
     </>

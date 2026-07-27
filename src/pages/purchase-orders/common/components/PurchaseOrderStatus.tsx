@@ -36,16 +36,16 @@ export function PurchaseOrderStatus(props: Props) {
   const isAccepted = status_id === PurchaseOrderStatusEnum.Accepted;
 
   if (is_deleted) {
-    return <Badge variant="red">{t('deleted')}</Badge>;
+    return <Badge withDot variant="red">{t('deleted')}</Badge>;
   }
 
   if (archived_at) {
-    return <Badge variant="orange">{t('archived')}</Badge>;
+    return <Badge withDot variant="orange">{t('archived')}</Badge>;
   }
 
   if (isCancelled) {
     return (
-      <Badge variant="purple" style={{ backgroundColor: statusThemeColors.$5 }}>
+      <Badge withDot variant="purple" style={{ backgroundColor: statusThemeColors.$5 }}>
         {t('cancelled')}
       </Badge>
     );
@@ -53,7 +53,7 @@ export function PurchaseOrderStatus(props: Props) {
 
   if (status_id === PurchaseOrderStatusEnum.Received) {
     return (
-      <Badge variant="green" style={{ backgroundColor: statusThemeColors.$3 }}>
+      <Badge withDot variant="green" style={{ backgroundColor: statusThemeColors.$3 }}>
         {t('received')}
       </Badge>
     );
@@ -61,7 +61,7 @@ export function PurchaseOrderStatus(props: Props) {
 
   if (isAccepted) {
     return (
-      <Badge
+      <Badge withDot
         variant="dark-blue"
         style={{ backgroundColor: statusThemeColors.$2 }}
       >
@@ -72,7 +72,7 @@ export function PurchaseOrderStatus(props: Props) {
 
   if (isSent) {
     return (
-      <Badge
+      <Badge withDot
         variant="light-blue"
         style={{ backgroundColor: statusThemeColors.$1 }}
       >
@@ -82,12 +82,12 @@ export function PurchaseOrderStatus(props: Props) {
   }
 
   if (isDraft) {
-    return <Badge variant="generic">{t('draft')}</Badge>;
+    return <Badge withDot variant="generic">{t('draft')}</Badge>;
   }
 
   if (isViewed && !isCancelled && !isAccepted) {
     return (
-      <Badge variant="yellow" style={{ backgroundColor: statusThemeColors.$4 }}>
+      <Badge withDot variant="yellow" style={{ backgroundColor: statusThemeColors.$4 }}>
         {t('viewed')}
       </Badge>
     );
