@@ -43,7 +43,9 @@ export function useAuthenticated(): boolean {
   queryClient.fetchQuery('/api/v1/refresh', () =>
     request(
       'POST',
-      endpoint('/api/v1/refresh?updated_at=:updatedAt', {
+      // gom: current_company=true scopes the payload to the token's company,
+      // so the UI can never show company A while the token writes to B.
+      endpoint('/api/v1/refresh?updated_at=:updatedAt&current_company=true', {
         updatedAt: dayjs().unix(),
       })
     )
@@ -64,7 +66,9 @@ export function useAuthenticated(): boolean {
             ) || 0;
         }
 
-        if (currentIndex === -1) {
+        if (currentIndex === -1 || currentIndex >= response.data.data.length) {
+          // gom: a stale X-CURRENT-INDEX can exceed the (now company-scoped)
+          // payload — clamp instead of indexing past the array.
           currentIndex = 0;
         }
 

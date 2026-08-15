@@ -8,6 +8,9 @@
  * @license https://www.elastic.co/licensing/elastic-license
  */
 
+import { useAtomValue } from 'jotai';
+
+import { gomDarkModeAtom } from './gom/atoms';
 import { useReactSettingsField } from './hooks/useReactSettings';
 
 // export const $1 = {
@@ -98,5 +101,9 @@ export const lightColorScheme = {
 export function useColorScheme() {
   const darkMode = useReactSettingsField('dark_mode');
 
-  return darkMode ? darkColorScheme : lightColorScheme;
+  /* gom: a theme forced by the Green0meter host wins over the preference. */
+  const gomDarkMode = useAtomValue(gomDarkModeAtom);
+  const isDark = gomDarkMode !== null ? gomDarkMode : darkMode;
+
+  return isDark ? darkColorScheme : lightColorScheme;
 }

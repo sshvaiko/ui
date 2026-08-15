@@ -10,7 +10,7 @@
 
 import { useCurrentCompany } from '$app/common/hooks/useCurrentCompany';
 import { useResolveLanguage } from '$app/common/hooks/useResolveLanguage';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -19,7 +19,8 @@ import { RootState } from './common/stores/store';
 import dayjs from 'dayjs';
 import { useResolveDayJSLocale } from './common/hooks/useResolveDayJSLocale';
 import { useResolveAntdLocale } from './common/hooks/useResolveAntdLocale';
-import { atom, useSetAtom } from 'jotai';
+import { atom, useAtomValue, useSetAtom } from 'jotai';
+import { gomDarkModeAtom, gomLocaleAtom } from '$app/common/gom/atoms';
 import { useSwitchToCompanySettings } from './common/hooks/useSwitchToCompanySettings';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useCurrentSettingsLevel } from './common/hooks/useCurrentSettingsLevel';
@@ -107,13 +108,26 @@ export function App() {
   const [isCompanyEditModalOpened, setIsCompanyEditModalOpened] =
     useState(false);
 
-  const resolvedLanguage = company
-    ? resolveLanguage(
-        user?.language_id && user.language_id.length > 0
-          ? user.language_id
-          : company.settings.language_id
-      )
-    : undefined;
+  /* gom: a locale forced by the Green0meter host wins over user/company.
+   * Memoized — the language effect depends on this object's identity. */
+  const gomLocale = useAtomValue(gomLocaleAtom);
+  const gomDarkMode = useAtomValue(gomDarkModeAtom);
+
+  const gomLanguage = useMemo(
+    () =>
+      gomLocale ? { id: '', locale: gomLocale, name: gomLocale } : undefined,
+    [gomLocale]
+  );
+
+  const resolvedLanguage =
+    gomLanguage ??
+    (company
+      ? resolveLanguage(
+          user?.language_id && user.language_id.length > 0
+            ? user.language_id
+            : company.settings.language_id
+        )
+      : undefined);
 
   const handleToasterErrors = (event: Event) => {
     if (!id && !location.pathname.startsWith('/settings')) {
@@ -134,13 +148,13 @@ export function App() {
 
   useEffect(() => {
     if (reactSettings) {
-      const colorScheme = reactSettings.dark_mode
-        ? darkColorScheme
-        : lightColorScheme;
+      const isDark =
+        gomDarkMode !== null ? gomDarkMode : reactSettings.dark_mode;
+      const colorScheme = isDark ? darkColorScheme : lightColorScheme;
       document.body.style.backgroundColor = colorScheme.$23;
       document.body.style.colorScheme = colorScheme.$0;
     }
-  }, [reactSettings]);
+  }, [reactSettings, gomDarkMode]);
 
   useEffect(() => {
     if (resolvedLanguage?.locale) {

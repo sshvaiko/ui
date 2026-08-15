@@ -27,6 +27,7 @@ import mitt from 'mitt';
 import { Events } from './common/events';
 
 import { loader } from '@monaco-editor/react';
+import { gomBridgeBoot } from '$app/common/gom/bridge';
 
 import * as monaco from 'monaco-editor';
 import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';
@@ -89,20 +90,24 @@ loader.init().then(/* ... */);
 
 const container = document.getElementById('root') as HTMLElement;
 
-createRoot(container).render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
-        <GoogleOAuth>
-          <Router>
-            <ScrollToTop>
-              <App />
-            </ScrollToTop>
-          </Router>
-        </GoogleOAuth>
-      </Provider>
-    </QueryClientProvider>
-  </React.StrictMode>
+/* gom: settle embed auth (token injection from the Green0meter host) before
+ * the first render so useAuthenticated() sees the token on first paint. */
+gomBridgeBoot().then(() =>
+  createRoot(container).render(
+    <React.StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <Provider store={store}>
+          <GoogleOAuth>
+            <Router>
+              <ScrollToTop>
+                <App />
+              </ScrollToTop>
+            </Router>
+          </GoogleOAuth>
+        </Provider>
+      </QueryClientProvider>
+    </React.StrictMode>
+  )
 );
 
 export const emitter = mitt<Events>();
