@@ -35,7 +35,7 @@ export function CreditStatus(props: Props) {
 
   if (is_deleted) return <Badge withDot variant="red">{t('deleted')}</Badge>;
 
-  if (archived_at) return <Badge withDot variant="orange">{t('archived')}</Badge>;
+  if (archived_at) return <Badge withDot variant="generic">{t('archived')}</Badge>;
 
   if (isViewed && isUnpaid) {
     return <Badge withDot variant="light-blue">{t('viewed')}</Badge>;
@@ -59,7 +59,7 @@ export function CreditStatus(props: Props) {
   if (status_id === CreditStatusEnum.Partial) {
     return (
       <Badge withDot
-        variant="dark-blue"
+        variant="yellow"
         style={{ backgroundColor: statusThemeColors.$2 }}
       >
         {t('partial')}

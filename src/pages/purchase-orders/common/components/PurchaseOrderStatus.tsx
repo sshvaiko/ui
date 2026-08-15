@@ -40,12 +40,12 @@ export function PurchaseOrderStatus(props: Props) {
   }
 
   if (archived_at) {
-    return <Badge withDot variant="orange">{t('archived')}</Badge>;
+    return <Badge withDot variant="generic">{t('archived')}</Badge>;
   }
 
   if (isCancelled) {
     return (
-      <Badge withDot variant="purple" style={{ backgroundColor: statusThemeColors.$5 }}>
+      <Badge withDot variant="red" style={{ backgroundColor: statusThemeColors.$5 }}>
         {t('cancelled')}
       </Badge>
     );
@@ -62,7 +62,7 @@ export function PurchaseOrderStatus(props: Props) {
   if (isAccepted) {
     return (
       <Badge withDot
-        variant="dark-blue"
+        variant="green"
         style={{ backgroundColor: statusThemeColors.$2 }}
       >
         {t('accepted')}
@@ -87,7 +87,7 @@ export function PurchaseOrderStatus(props: Props) {
 
   if (isViewed && !isCancelled && !isAccepted) {
     return (
-      <Badge withDot variant="yellow" style={{ backgroundColor: statusThemeColors.$4 }}>
+      <Badge withDot variant="light-blue" style={{ backgroundColor: statusThemeColors.$4 }}>
         {t('viewed')}
       </Badge>
     );

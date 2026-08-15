@@ -42,13 +42,13 @@ export function ExpenseStatus(props: Props) {
   }
 
   if (archived_at) {
-    return <Badge withDot variant="orange">{t('archived')}</Badge>;
+    return <Badge withDot variant="generic">{t('archived')}</Badge>;
   }
 
   if (isInvoiced) {
     return (
       <Badge withDot
-        variant="dark-blue"
+        variant="green"
         style={{ backgroundColor: statusThemeColors.$3 }}
       >
         {t('invoiced')}
@@ -57,7 +57,7 @@ export function ExpenseStatus(props: Props) {
   }
 
   if (should_be_invoiced)
-    return <Badge withDot variant="light-blue">{t('pending')}</Badge>;
+    return <Badge withDot variant="yellow">{t('pending')}</Badge>;
 
   if (isPaid) {
     return (

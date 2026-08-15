@@ -23,11 +23,11 @@ export function EntityStatus(props: Props) {
   const state = getEntityState(props.entity);
 
   if (state === EntityState.Active) {
-    return <Badge variant="primary">{t('active')}</Badge>;
+    return <Badge variant="green">{t('active')}</Badge>;
   }
 
   if (state === EntityState.Archived) {
-    return <Badge variant="yellow">{t('archived')}</Badge>;
+    return <Badge variant="generic">{t('archived')}</Badge>;
   }
 
   if (state === EntityState.Deleted) {

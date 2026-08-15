@@ -174,7 +174,7 @@ export default function Document() {
                       <Badge variant="red">{t('deleted')}</Badge>
                     )}
                     {document.archived_at && (
-                      <Badge variant="orange">{t('archived')}</Badge>
+                      <Badge variant="generic">{t('archived')}</Badge>
                     )}
 
                     <Badge

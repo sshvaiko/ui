@@ -74,7 +74,22 @@ export function Badge(props: Props) {
   };
 
   /* gom: platform tint pairs (green0meter customPalette) — 50-shade bg with
-     700-shade text in light mode; translucent bg with 300-shade text in dark. */
+     700-shade text in light mode; translucent bg with 300-shade text in dark.
+
+     STATUS COLOR BUCKETS — every entity status maps to exactly one of five
+     variants by MEANING, consistently across entities:
+       green      positive/terminal-good: paid, approved, completed, active,
+                  converted/accepted/received, invoiced, applied, settled
+       yellow     awaiting a human: pending, requested, partial(ly paid),
+                  unmatched
+       red        negative/needs attention now: past due, rejected, cancelled,
+                  failed, deleted
+       light-blue informational in-flight: sent, viewed, matched
+       generic    neutral/inactive: draft, logged, archived, paused, expired,
+                  reversed, refunded/unapplied
+     The remaining variants (primary, orange, blue, dark-blue, teal, purple,
+     black, white, transparent) are NOT for statuses — primary tracks the
+     company accent; the rest exist for non-status UI accents. */
   const scheme = useColorScheme();
 
   const variantColors: Partial<

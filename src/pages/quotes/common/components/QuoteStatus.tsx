@@ -49,7 +49,7 @@ export function QuoteStatus(props: Props) {
 
   if (is_deleted) return <Badge withDot variant="red">{t('deleted')}</Badge>;
 
-  if (archived_at) return <Badge withDot variant="orange">{t('archived')}</Badge>;
+  if (archived_at) return <Badge withDot variant="generic">{t('archived')}</Badge>;
 
   if (invoice_id) {
     return (
@@ -61,7 +61,7 @@ export function QuoteStatus(props: Props) {
 
   if (statusExpired && !isExpiringToday) {
     return (
-      <Badge withDot variant="red" style={{ backgroundColor: statusThemeColors.$5 }}>
+      <Badge withDot variant="generic" style={{ backgroundColor: statusThemeColors.$5 }}>
         {t('expired')}
       </Badge>
     );
@@ -76,7 +76,7 @@ export function QuoteStatus(props: Props) {
   }
 
   if (isViewed && isUnpaid && !isApproved) {
-    return <Badge withDot variant="yellow">{t('viewed')}</Badge>;
+    return <Badge withDot variant="light-blue">{t('viewed')}</Badge>;
   }
 
   if (status_id === QuoteStatusEnum.Draft) {
@@ -100,7 +100,7 @@ export function QuoteStatus(props: Props) {
   if (status_id === QuoteStatusEnum.Approved) {
     return (
       <Badge withDot
-        variant="dark-blue"
+        variant="green"
         style={{ backgroundColor: statusThemeColors.$2 }}
       >
         {t('approved')}

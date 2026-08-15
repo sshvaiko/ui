@@ -22,7 +22,7 @@ export function GomApprovalBadge(props: Props) {
   const { approval } = props;
 
   if (approval?.status === 1) {
-    return <Badge withDot variant="orange">{t('gom_approval_requested')}</Badge>;
+    return <Badge withDot variant="yellow">{t('gom_approval_requested')}</Badge>;
   }
 
   if (approval?.status === 2) {

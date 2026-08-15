@@ -26,7 +26,7 @@ export function BusinessTripStatus(props: Props) {
   }
 
   if (archived_at) {
-    return <Badge withDot variant="orange">{t('archived')}</Badge>;
+    return <Badge withDot variant="generic">{t('archived')}</Badge>;
   }
 
   if (status_id === 2) {
@@ -42,7 +42,7 @@ export function BusinessTripStatus(props: Props) {
   }
 
   if (status_id === 5) {
-    return <Badge withDot variant="light-blue">{t('trip_status_settled')}</Badge>;
+    return <Badge withDot variant="green">{t('trip_status_settled')}</Badge>;
   }
 
   return <Badge withDot variant="generic">{t('trip_status_draft')}</Badge>;

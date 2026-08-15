@@ -250,7 +250,7 @@ export function useGenerateActivityElement() {
   return (activity: ActivityRecord) => (
     <Box
       key={activity.id}
-      className="flex space-x-3 p-4 rounded-md flex-1 min-w-0 w-full"
+      className="flex space-x-3 p-4 rounded-md shrink-0 min-w-0 w-full"
       theme={{
         backgroundColor: colors.$1,
         hoverBackgroundColor: colors.$25,

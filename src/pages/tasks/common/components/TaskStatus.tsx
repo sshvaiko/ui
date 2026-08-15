@@ -63,7 +63,7 @@ export function TaskStatus(props: Props) {
 
   if (is_deleted) return <Badge withDot variant="red">{t('deleted')}</Badge>;
 
-  if (archived_at) return <Badge withDot variant="orange">{t('archived')}</Badge>;
+  if (archived_at) return <Badge withDot variant="generic">{t('archived')}</Badge>;
 
   if (invoice_id) {
     return (

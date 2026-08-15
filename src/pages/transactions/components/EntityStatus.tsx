@@ -31,13 +31,13 @@ export function EntityStatus(props: Props) {
   }
 
   if (archived_at) {
-    return <Badge variant="orange">{t('archived')}</Badge>;
+    return <Badge variant="generic">{t('archived')}</Badge>;
   }
 
   if (TransactionStatus.Unmatched === status_id) {
     return (
       <Badge
-        variant="generic"
+        variant="yellow"
         style={{ backgroundColor: statusThemeColors.$1 }}
       >
         {t(transactionStatuses[1])}
@@ -48,7 +48,7 @@ export function EntityStatus(props: Props) {
   if (TransactionStatus.Matched === status_id) {
     return (
       <Badge
-        variant="dark-blue"
+        variant="light-blue"
         style={{ backgroundColor: statusThemeColors.$2 }}
       >
         {t(transactionStatuses[2])}

@@ -76,7 +76,7 @@ export function InvoiceStatus(props: Props) {
 
   if (props.entity.archived_at) {
     return (
-      <Badge withDot variant="orange" style={props.style}>
+      <Badge withDot variant="generic" style={props.style}>
         {t('archived')}
       </Badge>
     );
@@ -96,7 +96,7 @@ export function InvoiceStatus(props: Props) {
   if (isViewed && isUnpaid && !isPartial && !isCancelledOrReversed) {
     return (
       <Badge withDot
-        variant="yellow"
+        variant="light-blue"
         style={{ backgroundColor: statusThemeColors.$4, ...props.style }}
       >
         {t('viewed')}
@@ -129,7 +129,7 @@ export function InvoiceStatus(props: Props) {
   if (status_id === InvoiceStatusEnum.Partial) {
     return (
       <Badge withDot
-        variant="dark-blue"
+        variant="yellow"
         style={{ backgroundColor: statusThemeColors.$2, ...props.style }}
       >
         {t('partial')}
@@ -150,7 +150,7 @@ export function InvoiceStatus(props: Props) {
 
   if (status_id === InvoiceStatusEnum.Cancelled) {
     return (
-      <Badge withDot variant="purple" style={props.style}>
+      <Badge withDot variant="red" style={props.style}>
         {t('cancelled')}
       </Badge>
     );
@@ -158,14 +158,14 @@ export function InvoiceStatus(props: Props) {
 
   if (status_id === InvoiceStatusEnum.Reversed) {
     return (
-      <Badge withDot variant="teal" style={props.style}>
+      <Badge withDot variant="generic" style={props.style}>
         {t('reversed')}
       </Badge>
     );
   }
 
   return (
-    <Badge withDot variant="teal" style={props.style}>
+    <Badge withDot variant="generic" style={props.style}>
       {t('reversed')}
     </Badge>
   );
